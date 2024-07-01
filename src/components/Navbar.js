@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav>
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
-        <li style={{ display: 'inline', marginRight: '10px' }}>
-          <Link to="/">Home</Link>
+    <nav className="bg-gray-800 text-white flex items-center justify-between px-4 py-2">
+      <Link to="/" className="text-xl font-bold">Pokédex</Link>
+
+      <ul className="hidden md:flex space-x-4">
+        <li>
+          <Link to="/" className="hover:text-gray-400">Home</Link>
         </li>
-        <li style={{ display: 'inline' }}>
-          <Link to="/settings">Settings</Link>
+        <li>
+          <Link to="/settings" className="hover:text-gray-400">Settings</Link>
         </li>
       </ul>
     </nav>
