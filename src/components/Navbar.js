@@ -11,8 +11,12 @@ function Navbar() {
           <Link to="/" className="hover:text-gray-400">Home</Link>
         </li>
         <li>
+          <Link to="/favorites" className="hover:text-grey-400">Favourites</Link>
+        </li>
+        <li>
           <Link to="/settings" className="hover:text-gray-400">Settings</Link>
         </li>
+        
       </ul>
     </nav>
   );

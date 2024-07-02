@@ -1,25 +1,29 @@
-# Dependencies
-node_modules/
+# Node.js dependencies
+/node_modules/
+npm-debug.log*
 
-# Build output
-build/
-dist/
+# Build files
+/build/
+/dist/
 
-# Temporary files
+# Logs and debugging
 *.log
-*.tmp
-*.swp
-
-# System files
-.DS_Store
-Thumbs.db
+npm-debug.log*
 
 # Environment variables
 .env
 
-# VS Code
-.vscode/
+# Other sensitive or generated files
+/.vscode/
+.DS_Store
+.idea/
 
-# Others
-public/
-react.zip
+# IDE-specific files
+*.code-workspace
+
+# Exclude obfuscation source files but include .min.js files
+/src/*.js
+!/src/*.min.js
+
+# Ignore any other specific files or directories that should not be version controlled
+obfuscate.sh

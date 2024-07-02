@@ -18,7 +18,7 @@ function PokemonDetail() {
           pokemonData = response.data;
           await savePokemon(pokemonData);
         }
-        console.log('Fetched Pokémon detail in PokemonDetail:', pokemonData); // Log the data
+        console.log('Fetched Pokémon detail in PokemonDetail:', pokemonData);
         setPokemon(pokemonData);
       } catch (error) {
         setError('Failed to fetch Pokémon data.');
@@ -29,6 +29,12 @@ function PokemonDetail() {
     };
     fetchData();
   }, [pokemonId]);
+
+  const toggleFavorite = async () => {
+    pokemon.isFavorite = !pokemon.isFavorite;
+    await savePokemon(pokemon);
+    setPokemon({ ...pokemon }); // Update state to re-render with the new favorite status
+  };
 
   if (loading) {
     return <div className="text-center p-4">Loading...</div>;
@@ -45,15 +51,18 @@ function PokemonDetail() {
   const weightInKg = pokemon.weight / 10; // Convert weight to kg (assuming API returns weight in hectograms)
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 dark:bg-gray-900">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold">{pokemon.name}</h1>
+        <h1 className="text-3xl font-bold dark:text-white">{pokemon.name}</h1>
         {pokemon.sprites && pokemon.sprites.front_default && (
           <img src={pokemon.sprites.front_default} alt={pokemon.name} className="w-32 h-32 rounded-full mx-auto" />
         )}
+        <button onClick={toggleFavorite} className="text-3xl">
+          {pokemon.isFavorite ? '★' : '☆'}
+        </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
+        <div className="dark:text-white">
           <p>Height: {pokemon.height} cm</p>
           <p>Weight: {weightInKg.toFixed(2)} kg</p>
           {pokemon.types && (
@@ -64,8 +73,8 @@ function PokemonDetail() {
           )}
         </div>
         <div>
-          <h2>Stats:</h2>
-          <ul className="list-disc space-y-2">
+          <h2 className="text-xl font-bold mb-2 dark:text-white">Stats:</h2>
+          <ul className="list-disc space-y-2 dark:text-white">
             {pokemon.stats.map(stat => (
               <li key={stat.stat.name}>{`${stat.stat.name}: ${stat.base_stat}`}</li>
             ))}
@@ -73,7 +82,7 @@ function PokemonDetail() {
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default PokemonDetail;
